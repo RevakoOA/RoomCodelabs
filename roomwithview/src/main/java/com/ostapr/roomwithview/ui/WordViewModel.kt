@@ -1,4 +1,4 @@
-package com.ostapr.roomwithview
+package com.ostapr.roomwithview.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
