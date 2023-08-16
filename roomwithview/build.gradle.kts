@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -26,22 +27,50 @@ android {
             )
         }
     }
+
+    packaging {
+        resources.excludes.add("META-INF/atomicfu.kotlin_module")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Room components
+    implementation(libs.androidx.room)
+    ksp(libs.androidx.room.compiler)
+    androidTestImplementation(libs.androidx.room.testing)
+
+
+    // Lifecycle components
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    // Kotlin components
+    implementation(libs.jetbrains.kotlin.jdk)
+    api(libs.jetbrains.kotlin.coroutines.core)
+    api(libs.jetbrains.kotlin.coroutines.android)
+
+    // UI
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.android.material)
+
+    // Testing
+    testImplementation(libs.testing.junit)
+    androidTestImplementation(libs.testing.androidx.core)
+    androidTestImplementation(libs.testing.androidx.espresso.core) {
+        exclude(group = "com.android.support", module = "support-annotations")
+    }
+    androidTestImplementation(libs.testing.androidx.junit.ext)
 }
