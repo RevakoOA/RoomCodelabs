@@ -9,6 +9,10 @@ lifecycleVersion = "2.4.0"
 materialVersion = "1.4.0"
 roomVersion = "2.3.0"
 
+# Plugins
+pluginAndroidApplication = "8.1.0"
+pluginKotlinAndroid = "1.8.0"
+
 # Annotation processing
 ksp = "1.8.21-1.0.11"
 
@@ -47,7 +51,10 @@ testing-androidx-core = { group = "androidx.arch.core", name = "core-testing", v
 testing-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoVersion" }
 
 [plugins]
-# KSP instead of KAPT
+android-application = { id = "com.android.application", version.ref = "pluginAndroidApplication" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "pluginKotlinAndroid" }
+
+# Kotlin Symbol Processing instead of KAPT
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
